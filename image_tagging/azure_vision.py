@@ -50,12 +50,10 @@ def recommend_svj(request):
     if (len(tags_result_remote.tags) == 0):
         print("No tags detected.")
     else:
-        for tag in tags_result_remote.tags:
-            tags_final  = "'{}' : {:.2f}".format(tag.name, tag.confidence * 100)
-            json_obj= (tags_final)
-            results_list.append(json_obj)
-        
-
+        results_list.extend(
+            "'{}' : {:.2f}".format(tag.name, tag.confidence * 100)
+            for tag in tags_result_remote.tags
+        )
     b= json.dumps(results_list) 
 
     if r.method == 'POST':
@@ -63,7 +61,7 @@ def recommend_svj(request):
         URL_meta = "https://bdgdao.azurewebsites.net/bodega-api/product_metadata/"
         r = requests.post(url= URL_meta, params= None)
         request_time = time.time()
-        
+
         data = r.get_json()
         print('finished getting request json')
 
@@ -76,7 +74,7 @@ def recommend_svj(request):
         print('prediction_probs', prediction_probs)
         print('predicted_label', predicted_label)
         print('prediction_runtime', prediction_runtime)
-        
+
 
     return (jsonify({ 
                      'predicted_label': str(predicted_label), 
