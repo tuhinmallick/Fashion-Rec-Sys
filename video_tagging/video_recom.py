@@ -17,7 +17,7 @@ print(image_url)
 
 response1 = request.urlretrieve(image_url, "media01")
 
-path = "/Users/rohittiwari/firebase_test/{}".format("media01")
+path = '/Users/rohittiwari/firebase_test/media01'
 
 '''class Data:
     def __format__(self, spec):
@@ -51,12 +51,11 @@ print("\nFinished processing.")
 aventador_list =[]
 
 segment_labels = result.annotation_results[0].segment_label_annotations
-for i, segment_label in enumerate(segment_labels):
-    
-    for category_entity in segment_label.category_entities:
+for segment_label in segment_labels:
+    for _ in segment_label.category_entities:
         print("reached 1st step")
 
-    for i, segment in enumerate(segment_label.segments):
+    for segment in segment_label.segments:
         start_time = (
             segment.segment.start_time_offset.seconds
             + segment.segment.start_time_offset.microseconds / 1e6
@@ -65,9 +64,9 @@ for i, segment_label in enumerate(segment_labels):
             segment.segment.end_time_offset.seconds
             + segment.segment.end_time_offset.microseconds / 1e6
         )
-        positions = "{}s to {}s".format(start_time, end_time)
+        positions = f"{start_time}s to {end_time}s"
         confidence = segment.confidence
-        
+
         desc_conf= "{} : {:.2f}".format(segment_label.entity.description,confidence)
         json_object = (desc_conf)
         aventador_list.append(json_object)
@@ -76,11 +75,11 @@ print(aventador_list)
 
 
 shot_labels = result.annotation_results[0].shot_label_annotations
-for i, shot_label in enumerate(shot_labels):
-    for category_entity in shot_label.category_entities:
+for shot_label in shot_labels:
+    for _ in shot_label.category_entities:
         print("reached 2nd step")
 
-    for i, shot in enumerate(shot_label.segments):
+    for shot in shot_label.segments:
         start_time = (
             shot.segment.start_time_offset.seconds
             + shot.segment.start_time_offset.microseconds / 1e6
@@ -89,9 +88,9 @@ for i, shot_label in enumerate(shot_labels):
             shot.segment.end_time_offset.seconds
             + shot.segment.end_time_offset.microseconds / 1e6
         )
-        positions = "{}s to {}s".format(start_time, end_time)
+        positions = f"{start_time}s to {end_time}s"
         confidence = shot.confidence
-        
+
         desc_conf1= "{} : {:.2f}".format(shot_label.entity.description,confidence)
         json_object1 = (desc_conf1)
         aventador_list.append(json_object1)

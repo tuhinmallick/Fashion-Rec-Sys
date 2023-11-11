@@ -1,5 +1,5 @@
 from colorthief import ColorThief  # Add this line
-import matplotlib.pyplot as plt  
+import matplotlib.pyplot as plt
 from gtts import gTTS
 from tempfile import NamedTemporaryFile
 import streamlit as st
@@ -77,30 +77,30 @@ elif choice == "About":
         st.markdown(html_temp_about1, unsafe_allow_html=True)
 
         st.write("FashionGPT is an AI-powered product recommender system designed to help users find their perfect fashion match. By leveraging the power of Transfer Learning, FashionGPT can analyze the visual features of a given image and recommend similar products that cater to the user's unique style preferences.")
-        
+
         st.write("## How it Works")
         st.write("FashionGPT uses a pre-trained ResNet50 model as a feature extractor to analyze the visual aspects of a user's selected image. It then compares the extracted features with a database of product images to find the most visually similar items. The Nearest Neighbors algorithm is employed to identify the top 5 matching products based on their similarity scores.")
-        
+
         st.write("## Key Features")
         st.write("- State-of-the-art deep learning model for feature extraction")
         st.write("- Efficient and accurate product recommendations")
         st.write("- User-friendly interface for seamless interaction")
         st.write("- Wide range of supported fashion products")
         st.write("- Continually updated and refined to deliver the best results")
-        
+
         st.write("## Team")
         st.write("FashionGPT is developed by a dedicated AI enthusiast and fashion aficionado, who believe in harnessing the power of technology to improve the shopping experience for users. He is committed to delivering innovative solutions that help users find their ideal fashion products with ease and accuracy.")
-        
+
         st.write("## Contact Us")
         st.write("We would love to hear from you! If you have any questions, suggestions, or feedback, please feel free to reach out to us at [knowrohit.work@gmail.com](mailto:knowrohit.work@gmail.com). You can also connect with us on [Twitter](https://twitter.com/knowrohit07).")
-        
+
         st.write("## Acknowledgements")
         st.write("I would like to express our gratitude to the following resources and organizations for their invaluable support and contributions to the development of FashionGPT:")
         st.write("- [Rahul Tiwari](https://twitter.com/rahul_tiwari95) for the inspiration lmao")
         st.write("- [TensorFlow](https://www.tensorflow.org/) for the deep learning framework")
         st.write("- [Streamlit](https://streamlit.io/) for the web application framework")
         st.write("- [ResNet50](https://arxiv.org/abs/1512.03385) for the pre-trained deep learning model")
-        
+
         st.write("## Disclaimer")
         st.sidebar.markdown("## Connect with me")
         st.sidebar.markdown(
@@ -109,9 +109,6 @@ elif choice == "About":
 
 
         # st.markdown(html_temp4, unsafe_allow_html=True)
-
-else:
-   pass
 
 
 
@@ -125,14 +122,12 @@ def save_uploaded_file(uploaded_file):
         return 0
 
 def feature_extraction(img_path,model):
-    img = image.load_img(img_path, target_size=(244, 244))
-    img_array = image.img_to_array(img)
-    expanded_img_array = np.expand_dims(img_array, axis=0)
-    preprocessed_img = preprocess_input(expanded_img_array)
-    result = model.predict(preprocessed_img).flatten()
-    normalized_result = result / norm(result)
-
-    return normalized_result
+        img = image.load_img(img_path, target_size=(244, 244))
+        img_array = image.img_to_array(img)
+        expanded_img_array = np.expand_dims(img_array, axis=0)
+        preprocessed_img = preprocess_input(expanded_img_array)
+        result = model.predict(preprocessed_img).flatten()
+        return result / norm(result)
 
 
 def display_color_palette(img_path, num_colors=5):

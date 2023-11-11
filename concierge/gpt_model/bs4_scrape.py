@@ -6,9 +6,7 @@ def get_article_content(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Find the main content container
-    content = soup.find('div', {'class': 'content-and-rail'})
-    if content:
+    if content := soup.find('div', {'class': 'content-and-rail'}):
         # Remove unwanted elements
         for script in content(['script', 'style', 'aside', 'figure']):
             script.decompose()
